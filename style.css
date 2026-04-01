@@ -8,8 +8,9 @@
 
 /* Sección de la imagen (Cloudinary) */
 .login-image {
-    flex: 1;
-    background-image: url('https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia1.jpg');
+   width: 75%;
+    height: 100vh;
+    background-image: url('https://res.cloudinary.com/TU_USUARIO/image/upload/v1/fachadas/principal.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -20,19 +21,26 @@
 
 .overlay {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    padding: 40px;
+    bottom: 50px;
+    left: 50px;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    padding: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
     color: white;
+    max-width: 500px;
 }
 
-/* Sección del formulario */
+/* Sección del formulario al 25% */
 .login-form-section {
-    flex: 1;
+    width: 25%; /* Ocupa el 25% restante */
+    min-width: 350px; /* Seguridad: no deja que el formulario sea demasiado flaco */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f4f7f6;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Sombra para separar de la foto */
+    z-index: 10;
 }
 
 .form-box {
