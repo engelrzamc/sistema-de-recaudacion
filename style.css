@@ -10,8 +10,7 @@
 .login-image {
    width: 75%;
     height: 100vh;
-    https://res.cloudinary.com/dtne63b6s/image/upload/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg
-    background-image: url('');
+    background-image: url('https://res.cloudinary.com/dtne63b6s/image/upload/v1775025846/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
