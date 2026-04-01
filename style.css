@@ -105,7 +105,7 @@ main {
 
 /* Sección de la imagen (Ahora al 60%) */
 .fachada-dinamica {
-    width: 60%; /* Bajamos de 75% a 60% */
+    width: 25%; /* Bajamos de 75% a 60% */
     height: calc(100vh - 120px);
     background-size: cover;
     background-position: center;
@@ -115,7 +115,7 @@ main {
 
 /* Sección del formulario (Ahora al 40%) */
 .form-tributos-container {
-    width: 40%; /* Subimos de 25% a 40% */
+    width: 75%; /* Subimos de 25% a 40% */
     display: flex;
     align-items: center;
     justify-content: center;
