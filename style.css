@@ -95,7 +95,7 @@ header {
     letter-spacing: 0.3px;
 }
 
-/* --- 3. CUERPO (Main) - Diseño Split Screen (75/25) --- */
+/* --- 3. CUERPO (Main) - Diseño Split Screen (25/75) --- */
 main {
     display: flex;
     flex: 1;
@@ -103,7 +103,7 @@ main {
     background-color: #f4f7f6; /* Fondo ligero para contraste */
 }
 
-/* Lado Izquierdo: Imagen de Cloudinary (75%) */
+/* Lado Izquierdo: Imagen de Cloudinary (25%) */
 .fachada-dinamica {
     width: 75%;
     height: calc(100vh - 120px); /* Ajuste para header fijo */
@@ -122,7 +122,7 @@ main {
     background: rgba(0,0,0,0.1);
 }
 
-/* Lado Derecho: Formulario (25%) */
+/* Lado Derecho: Formulario (75%) */
 .form-tributos-container {
     width: 25%;
     min-width: 380px; /* Ancho de seguridad para que el form no se comprima */
