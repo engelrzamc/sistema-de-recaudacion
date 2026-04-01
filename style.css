@@ -1,0 +1,74 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Sección de la imagen (Cloudinary) */
+.login-image {
+    flex: 1;
+    background-image: url('https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia1.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: none; /* Se oculta en móviles para ahorrar datos */
+}
+
+@media (min-width: 768px) { .login-image { display: block; } }
+
+.overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 40px;
+    color: white;
+}
+
+/* Sección del formulario */
+.login-form-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f7f6;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.logo { width: 80px; margin-bottom: 20px; }
+
+.input-group { text-align: left; margin-bottom: 15px; }
+
+.input-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #333; }
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #0056b3; /* Un azul institucional */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover { background-color: #004494; }
