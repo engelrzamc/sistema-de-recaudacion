@@ -1,82 +1,380 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+/* --- style.css --- */
+/* Réplica Exacta de Interfaz Institucional - Alcaldía Ayacucho */
 
-.login-container {
-    display: flex;
-    height: 100vh;
-    width: 100%;
+/* --- 1. CONFIGURACIÓN GENERAL (Reset & Fuentes) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; /* Fuente Roboto essential */
+    -webkit-font-smoothing: antialiased; /* Suavizado de fuente */
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Sección de la imagen (Cloudinary) */
-.login-image {
-   width: 75%;
-    height: 100vh;
-    background-image: url('https://res.cloudinary.com/dtne63b6s/image/upload/v1775025846/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg');
+body {
+    background-color: #ffffff;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Links (Azul institucional sutil) */
+a {
+    text-decoration: none;
+    transition: 0.2s;
+    color: #004b9c;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #003a7a;
+}
+
+/* --- 2. ENCABEZADO (Header Institucional) --- */
+header {
+    width: 100%;
+    border-bottom: 1px solid #dcdcdc;
+    background-color: #ffffff;
+    z-index: 20;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 70px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.logo-gobierno, .logo-ayacucho {
+    height: 45px;
+    width: auto;
+}
+
+.nav-inicio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
+}
+
+.icon-inicio {
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+.header-bar {
+    width: 100%;
+    height: 50px;
+    background-color: #004b9c; /* Azul oscuro exacto de la referencia */
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    color: white;
+}
+
+.icon-menu {
+    font-size: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.title-tributos {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* --- 3. CUERPO (Main) - Diseño Split Screen (75/25) --- */
+main {
+    display: flex;
+    flex: 1;
+    position: relative;
+    background-color: #f4f7f6; /* Fondo ligero para contraste */
+}
+
+/* Lado Izquierdo: Imagen de Cloudinary (75%) */
+.fachada-dinamica {
+    width: 75%;
+    height: calc(100vh - 120px); /* Ajuste para header fijo */
+    /* Asegúrate de tener la URL en el script.js */
     background-size: cover;
     background-position: center;
     position: relative;
-    display: none; /* Se oculta en móviles para ahorrar datos */
+    transition: background-image 1s ease-in-out; /* Suavizado de cambio de foto */
 }
 
-@media (min-width: 768px) { .login-image { display: block; } }
-
-.overlay {
+/* Capa muy ligera sobre la foto para legibilidad */
+.fachada-dinamica::before {
+    content: '';
     position: absolute;
-    bottom: 50px;
-    left: 50px;
-    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-    padding: 20px;
-    border-radius: 8px;
-    backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
-    color: white;
-    max-width: 500px;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.1);
 }
 
-/* Sección del formulario al 25% */
-.login-form-section {
-    width: 25%; /* Ocupa el 25% restante */
-    min-width: 350px; /* Seguridad: no deja que el formulario sea demasiado flaco */
+/* Lado Derecho: Formulario (25%) */
+.form-tributos-container {
+    width: 25%;
+    min-width: 380px; /* Ancho de seguridad para que el form no se comprima */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Sombra para separar de la foto */
+    box-shadow: -5px 0 20px rgba(0,0,0,0.03); /* Sombra sutil de separación */
     z-index: 10;
 }
 
-.form-box {
+.login-box {
     width: 100%;
-    max-width: 400px;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    text-align: center;
+    max-width: 320px; /* Ancho exacto del formulario interno */
+    padding: 0 20px;
+    text-align: left;
 }
 
-.logo { width: 80px; margin-bottom: 20px; }
-
-.input-group { text-align: left; margin-bottom: 15px; }
-
-.input-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #333; }
-
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    outline: none;
+.h2-autenticacion {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333333;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 25px;
 }
 
-.btn-primary {
+/* --- 4. RÉPLICA DE SELECTORES (Custom Radios Visual Match) --- */
+.user-type-group {
+    margin-bottom: 30px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+    padding-left: 28px; /* Espacio para el radio custom */
+}
+
+/* Ocultar el radio nativo feo */
+.radio-option input {
+    opacity: 0;
+    position: absolute;
+}
+
+/* Crear el círculo exterior (Gris por defecto) */
+.radio-custom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: 2px solid #cccccc; /* Gris de la referencia */
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+/* Cambiar color cuando está seleccionado (Azul institucional) */
+.radio-option input:checked ~ .radio-custom {
+    border-color: #004b9c;
+    background-color: #ffffff;
+}
+
+/* Crear el punto interior azul */
+.radio-custom::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 3px;
+    top: 3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #004b9c;
+}
+
+/* Mostrar el punto interior cuando está seleccionado */
+.radio-option input:checked ~ .radio-custom::after {
+    display: block;
+}
+
+.radio-label {
+    font-size: 13px;
+    color: #666666; /* Gris de la referencia */
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* --- 5. RÉPLICA DE LOS INPUTS (Cédula/Contraseña Visual Match) --- */
+.form-group-login {
+    margin-bottom: 18px;
+}
+
+.form-group-login label {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: #777777; /* Gris sutil */
+    margin-bottom: 6px;
+}
+
+.input-wrapper {
+    position: relative;
     width: 100%;
-    padding: 12px;
-    background-color: #0056b3; /* Un azul institucional */
+    display: flex;
+    border: 1px solid #dcdcdc; /* Borde gris claro */
+    border-radius: 4px;
+    overflow: hidden; /* Importante para los bordes internos */
+    background-color: #ffffff;
+}
+
+/* Contenedor del Icono (Fondo Gris Claro) */
+.input-icon-container {
+    width: 45px;
+    height: 45px;
+    background-color: #f5f5f5; /* Gris claro de la referencia */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #dcdcdc; /* División interna */
+    color: #888888;
+    font-size: 18px;
+}
+
+/* Input Real (Texto) */
+.input-real {
+    flex: 1;
+    height: 45px;
+    border: none; /* Sin borde, el borde lo da el wrapper */
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #444444;
+    outline: none; /* Quitar outline azul de Chrome */
+    background-color: #ffffff;
+}
+
+.input-real:focus {
+    box-shadow: 0 0 4px rgba(0,75,156,0.1);
+}
+
+.input-real::placeholder {
+    color: #bbbbbb; /* Color placeholder sutil */
+}
+
+/* Pre-texto de Cédula (V-) */
+.cedula-pretext {
+    font-size: 14px;
+    color: #888888;
+    font-weight: 500;
+    margin-left: -5px; /* Ajuste visual exacto */
+    margin-right: 5px;
+}
+
+/* Links de Ayuda (Estilo SAIME) */
+.login-helper-links {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: #004b9c;
+}
+
+/* --- 6. BOTÓN INGRESAR (Ancho y Color Exacto) --- */
+.btn-ingresar {
+    width: 100%;
+    height: 48px;
+    background-color: #004b9c; /* Azul oscuro exacto */
     color: white;
     border: none;
-    border-radius: 6px;
-    font-weight: bold;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.btn-primary:hover { background-color: #004494; }
+.btn-ingresar:hover {
+    background-color: #003a7a;
+}
+
+/* --- 7. PIE DE PÁGINA (Footer Institucional) --- */
+footer {
+    width: 100%;
+    border-top: 1px solid #dcdcdc;
+    font-size: 11px;
+    color: #666666;
+    background-color: #ffffff;
+    margin-top: auto; /* Empuja el footer al final si el main es corto */
+    z-index: 20;
+    position: relative;
+}
+
+.footer-top-border {
+    height: 10px;
+    background: linear-gradient(to right, #003061 50%, #ffffff 50%); /* Placeholder para el borde visual */
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px 5%;
+    line-height: 1.6;
+    text-align: left;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.footer-col-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.footer-logo-institucional {
+    height: 35px;
+    width: auto;
+}
+
+/* --- 8. RESPONSIVIDAD (Adaptación a Móviles) --- */
+@media (max-width: 1100px) {
+    .fachada-dinamica {
+        display: none; /* Desaparece la foto en tablets/móviles */
+    }
+    .form-tributos-container {
+        width: 100%;
+        min-width: 100%;
+        padding: 60px 0;
+        background-color: #f4f7f6; /* Fondo ligero en móvil */
+    }
+    .login-box {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .header-top, .footer-content {
+        padding: 10px 20px;
+    }
+    .footer-content {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        text-align: center;
+    }
+    .footer-col-logos {
+        align-items: center;
+    }
+}
