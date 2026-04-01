@@ -3,55 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Tributos - Alcaldía Ayacucho - Autenticación</title>
+    <title>SAIME - Autenticación de Usuario - Sistema Tributos Ayacucho</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS GENERALES (Reset) --- */
+        /* --- ESTILOS GENERALES (Reset para réplica exacta) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
-        a { text-decoration: none; transition: 0.3s; color: inherit; }
-        a:hover { color: #0056b3; text-decoration: underline; }
+        body { background-color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; color: #333; }
+        a { text-decoration: none; transition: 0.2s; color: #0056b3; font-size: 13px; }
+        a:hover { text-decoration: underline; }
 
-        /* --- 1. ENCABEZADO INSTITUCIONAL (Header) --- */
-        header { width: 100%; border-bottom: 1px solid #e0e0e0; }
-        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; height: 60px; }
+        /* --- 1. ENCABEZADO (Header) --- */
+        header { width: 100%; border-bottom: 1px solid #dcdcdc; }
         
-        .logo-gobierno { height: 40px; }
-        .logo-ayacucho { height: 40px; } /* Tu logo institucional secundario */
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: 70px; max-width: 1600px; margin: 0 auto; }
+        
+        /* Imagen de Cloudinary para el Logo Gobierno Venezuela */
+        .logo-gobierno { height: 45px; } 
 
-        .nav-inicio { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; color: #333; cursor: pointer; }
-        .icon-inicio { font-size: 18px; } /* Placeholder para un icono real */
+        .nav-inicio { display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 14px; color: #444; cursor: pointer; }
+        .icon-inicio { font-size: 16px; margin-right: 2px; } /* Placeholder */
+
+        /* Imagen de Cloudinary para el Escudo Ayacucho */
+        .logo-ayacucho { height: 45px; } 
 
         .header-bar { width: 100%; height: 50px; background-color: #004b9c; display: flex; align-items: center; padding: 0 5%; color: white; }
         .icon-menu { font-size: 20px; margin-right: 15px; cursor: pointer; }
-        .title-tributos { font-size: 18px; font-weight: 500; }
+        .title-tributos { font-size: 16px; font-weight: 500; }
 
-        /* --- 2. CUERPO DE LA PÁGINA (Login Container) --- */
+        /* --- 2. CUERPO (Main) - Split Screen --- */
         main { display: flex; flex: 1; position: relative; }
 
-        /* Sección Izquierda: Imagen Fachada (75%) */
+        /* Lado Izquierdo: Imagen Fachada (75%) */
         .fachada-dinamica {
             width: 75%;
-            height: calc(100vh - 110px); /* Restando header y footer aproximados */
-            /* PEGA AQUÍ TU URL PRINCIPAL DE CLOUDINARY PARA QUE NO SE VEA VACÍO */
-            background-image: url('https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia_ayacucho.jpg');
+            height: calc(100vh - 120px); /* Restando header */
+            /* PEGA AQUÍ TU URL PRINCIPAL DE CLOUDINARY */
+            background-image: url('https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia_ayacucho_fachada.jpg');
             background-size: cover;
             background-position: center;
             position: relative;
-            transition: background-image 0.8s ease-in-out; /* Suavizado para el cambio aleatorio */
+            transition: background-image 1s ease-in-out;
         }
         
-        /* Overlay oscuro para legibilidad si hay texto */
-        .fachada-dinamica::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.15); /* Muy ligero para mantener la foto clara */
-        }
+        /* Capa ligera para mejorar contraste sin oscurecer mucho */
+        .fachada-dinamica::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); }
 
-        /* Sección Derecha: Formulario (25%) */
+        /* Lado Derecho: Formulario (25%) */
         .form-tributos-container {
             width: 25%;
             min-width: 380px;
@@ -59,53 +58,92 @@
             align-items: center;
             justify-content: center;
             background-color: #ffffff;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.03);
             z-index: 10;
         }
 
         .login-box {
             width: 100%;
-            max-width: 340px;
-            padding: 20px;
+            max-width: 320px; /* Ancho exacto del formulario interno */
+            padding: 0 20px;
             text-align: left;
         }
 
-        .h2-autenticacion { font-size: 16px; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 25px; }
+        .h2-autenticacion { font-size: 15px; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 25px; }
 
-        /* Selectores de Tipo de Usuario (Radios replicando el estilo) */
-        .user-type-group { margin-bottom: 25px; }
+        /* --- RÉPLICA DE LOS SELECTORES (Radios Custom CSS) --- */
+        .user-type-group { margin-bottom: 30px; }
         
-        .radio-option { display: flex; align-items: center; margin-bottom: 15px; cursor: pointer; }
-        .radio-option input { margin-right: 12px; width: 18px; height: 18px; accent-color: #004b9c; cursor: pointer; }
-        .radio-label { font-size: 13px; color: #555; font-weight: 500; }
+        .radio-option { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; position: relative; padding-left: 28px; }
+        
+        /* Ocultar el radio nativo */
+        .radio-option input { opacity: 0; position: absolute; }
 
-        /* Campos de Entrada (Estilo SAIME con Iconos) */
-        .form-group-login { margin-bottom: 18px; position: relative; }
+        /* Crear el círculo exterior */
+        .radio-custom {
+            position: absolute; left: 0; top: 0;
+            height: 18px; width: 18px;
+            background-color: #fff;
+            border: 2px solid #ccc; /* Gris cuando no está seleccionado */
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        /* Cambiar color cuando está chequeado */
+        .radio-option input:checked ~ .radio-custom { border-color: #004b9c; background-color: #fff; }
+
+        /* Crear el punto interior azul */
+        .radio-custom::after {
+            content: ""; position: absolute; display: none;
+            left: 3px; top: 3px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #004b9c;
+        }
+
+        /* Mostrar el punto interior cuando está chequeado */
+        .radio-option input:checked ~ .radio-custom::after { display: block; }
+
+        .radio-label { font-size: 13px; color: #666; font-weight: 400; line-height: 1.2; }
+
+        /* --- RÉPLICA DE LOS INPUTS (Cédula/Contraseña) --- */
+        .form-group-login { margin-bottom: 18px; }
+        .form-group-login label { display: block; font-size: 12px; font-weight: 400; color: #777; margin-bottom: 6px; }
         
-        .form-group-login label { display: block; font-size: 12px; font-weight: 500; color: #777; margin-bottom: 5px; }
-        
-        .input-with-icon {
-            width: 100%;
+        .input-wrapper { position: relative; width: 100%; display: flex; border: 1px solid #dcdcdc; border-radius: 4px; overflow: hidden; background-color: #fff; }
+
+        /* Icono contenedor (Fondo gris) */
+        .input-icon-container {
+            width: 45px; height: 45px;
+            background-color: #f5f5f5;
+            display: flex; align-items: center; justify-content: center;
+            border-right: 1px solid #dcdcdc;
+            color: #888; font-size: 18px;
+        }
+
+        .input-real {
+            flex: 1;
             height: 45px;
-            border: 1px solid #dcdcdc;
-            border-radius: 4px;
-            padding: 10px 10px 10px 45px;
+            border: none;
+            padding: 10px 15px;
             font-size: 14px;
-            background-color: #fafafa;
-            transition: 0.3s;
+            color: #444;
+            outline: none;
         }
         
-        .input-with-icon:focus { border-color: #004b9c; background-color: #fff; outline: none; box-shadow: 0 0 5px rgba(0,75,156,0.2); }
+        .input-real:focus { box-shadow: 0 0 4px rgba(0,75,156,0.1); }
+        .input-real::placeholder { color: #bbb; }
 
-        .input-icon { position: absolute; left: 15px; top: 34px; color: #aaa; font-size: 18px; }
+        /* Pre-text para Cédula (V-) */
+        .cedula-pretext { font-size: 14px; color: #888; font-weight: 500; margin-left: -5px; margin-right: 5px; }
 
-        /* Links de "Olvidó" y "Registrar" */
-        .login-helper-links { display: flex; justify-content: space-between; font-size: 12px; color: #004b9c; margin-bottom: 30px; }
+        /* Links de Ayuda */
+        .login-helper-links { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; margin-bottom: 30px; color: #004b9c; }
 
-        /* Botón de Acción Principal (Estilo SAIME) */
+        /* --- BOTÓN (Ancho y Color Exacto) --- */
         .btn-ingresar {
             width: 100%;
-            height: 45px;
+            height: 48px;
             background-color: #004b9c;
             color: white;
             border: none;
@@ -115,30 +153,26 @@
             cursor: pointer;
             transition: background 0.3s;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .btn-ingresar:hover { background-color: #003a7a; }
 
-        /* --- 3. PIE DE PÁGINA INSTITUCIONAL (Footer) --- */
-        footer {
-            width: 100%;
-            border-top: 1px solid #e0e0e0;
-            font-size: 11px;
-            color: #666;
-            background-color: #ffffff;
-        }
+        /* --- 3. FOOTER (Réplica Exacta) --- */
+        footer { width: 100%; border-top: 1px solid #dcdcdc; font-size: 11px; color: #666; background-color: #ffffff; margin-top: auto; }
+        
+        .footer-top-border { height: 10px; background: linear-gradient(to right, #003061 50%, #ffffff 50%); } 
 
-        .footer-top-line { height: 10px; background: linear-gradient(to right, #003061 50%, #ffffff 50%); } /* Placeholder para el borde de la imagen */
+        .footer-content { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; padding: 20px 5%; line-height: 1.6; text-align: left; }
         
-        .footer-content { display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; gap: 20px; padding: 20px 5%; line-height: 1.5; text-align: left; }
-        
-        .footer-col-logos { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
-        .footer-logo-institucional { height: 35px; }
+        .footer-col-logos { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; justify-content: center; }
+        /* Imagen de Cloudinary para el Logo Institucional */
+        .footer-logo-institucional { height: 35px; } 
 
         /* --- 4. RESPONSIVIDAD --- */
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             .fachada-dinamica { display: none; }
-            .form-tributos-container { width: 100%; min-width: 100%; padding: 40px 0; }
+            .form-tributos-container { width: 100%; min-width: 100%; padding: 60px 0; }
         }
     </style>
 </head>
@@ -146,7 +180,7 @@
 
     <header>
         <div class="header-top">
-            <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/logo-gobierno-venezuela.png" alt="Gobierno Venezuela" class="logo-gobierno">
+            <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/gobierno-venezuela.png" alt="Gobierno Venezuela" class="logo-gobierno">
             <div class="nav-inicio">
                 <span class="icon-inicio">🏠</span> Inicio
             </div>
@@ -159,32 +193,48 @@
     </header>
 
     <main>
-        <div class="fachada-dinamica" id="bg-ayacucho"></div>
+        <div class="fachada-dinamica" id="bg-fachada"></div>
 
         <div class="form-tributos-container">
             <div class="login-box">
-                <h2 class="h2-autenticacion">Autenticación de Contribuyente</h2>
+                <h2 class="h2-autenticacion">Autenticación de Usuario</h2>
                 
                 <form id="loginForm">
                     <div class="user-type-group">
                         <label class="radio-option">
                             <input type="radio" name="userType" value="cedula_v" checked>
+                            <span class="radio-custom"></span>
                             <span class="radio-label">Venezolano Cedulado (Persona Natural)</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="userType" value="rif_j">
+                            <span class="radio-custom"></span>
                             <span class="radio-label">Persona Jurídica / RIF Comercial</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="extranjero">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">Extranjero Cedulado</span>
                         </label>
                     </div>
 
                     <div class="form-group-login">
                         <label for="cedula">Cédula de Identidad o RIF</label>
-                        <span class="input-icon">👤</span> <input type="text" id="cedula" name="cedula" class="input-with-icon" placeholder="V-12345678" required>
+                        <div class="input-wrapper">
+                            <div class="input-icon-container">👤</div>
+                            <div class="input-real" style="display: flex; align-items: center;">
+                                <span class="cedula-pretext" id="pretext-cedula">V-</span>
+                                <input type="text" id="cedula" name="cedula" placeholder="12345678" required style="border:none; padding:0; flex:1; outline:none;">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group-login">
                         <label for="password">Contraseña</label>
-                        <span class="input-icon">🔑</span> <input type="password" id="password" name="password" class="input-with-icon" placeholder="••••••••" required>
+                        <div class="input-wrapper">
+                            <div class="input-icon-container">🔑</div>
+                            <input type="password" id="password" name="password" class="input-real" placeholder="••••••••" required>
+                        </div>
                     </div>
 
                     <div class="login-helper-links">
@@ -199,7 +249,7 @@
     </main>
 
     <footer>
-        <div class="footer-top-line"></div>
+        <div class="footer-top-border"></div>
         <div class="footer-content">
             <div>
                 <strong>Alcaldía del Municipio Ayacucho</strong><br>
@@ -220,38 +270,63 @@
                 Planta Baja. San Juan de Colón.
             </div>
             <div class="footer-col-logos">
-                <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/logo-ayacucho.png" alt="Logo Alcaldía" class="footer-logo-institucional">
+                <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/logo-ayacucho.png" alt="Logo Municipio" class="footer-logo-institucional">
                 <strong>MUNICIPIO AYACUCHO</strong>
             </div>
         </div>
     </footer>
 
     <script>
-        // --- SUSTITUYE ESTOS LINKS POR TUS URLs DE CLOUDINARY ---
-        const imagenesAyacucho = [
+        // --- 1. CONFIGURACIÓN DE IMÁGENES DE CLOUDINARY ---
+        // SUSTITUYE ESTOS LINKS POR TUS URLs REALES
+        const fachadasAyacucho = [
             "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia1.jpg",
             "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/fachada2.jpg",
             "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/plaza_bolivar.jpg"
         ];
 
-        function cambiarFondoAleatorio() {
-            const contenedorBg = document.getElementById('bg-ayacucho');
+        function rotarFondoAleatorio() {
+            const contenedorBg = document.getElementById('bg-fachada');
             if (contenedorBg) {
-                // Elegir una imagen al azar de la lista
-                const fotoSeleccionada = imagenesAyacucho[Math.floor(Math.random() * imagenesAyacucho.length)];
+                // Elegir una imagen al azar
+                const fotoSeleccionada = fachadasAyacucho[Math.floor(Math.random() * fachadasAyacucho.length)];
                 contenedorBg.style.backgroundImage = `url('${fotoSeleccionada}')`;
             }
         }
 
-        // Ejecutar al cargar la página
-        window.onload = cambiarFondoAleatorio;
+        // --- 2. LÓGICA DE INTERFAZ ---
+        const radioVenezolano = document.querySelector('input[value="cedula_v"]');
+        const radioJuridico = document.querySelector('input[value="rif_j"]');
+        const pretextCedula = document.getElementById('pretext-cedula');
+        const inputCedula = document.getElementById('cedula');
 
-        // Manejar envío del formulario (Placeholder)
+        // Cambiar el pre-texto (V- / J-) según la selección
+        function actualizarPretext() {
+            if (radioJuridico.checked) {
+                pretextCedula.textContent = "J-";
+                inputCedula.placeholder = "12345678-0";
+            } else {
+                pretextCedula.textContent = "V-";
+                inputCedula.placeholder = "12345678";
+            }
+        }
+
+        // Ejecutar funciones al cargar
+        window.onload = () => {
+            rotarFondoAleatorio();
+            actualizarPretext();
+        };
+
+        // Eventos para cambiar el pre-texto
+        radioVenezolano.addEventListener('change', actualizarPretext);
+        radioJuridico.addEventListener('change', actualizarPretext);
+
+        // Capturar envío del formulario (Placeholder)
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const cedula = document.getElementById('cedula').value;
-            const userType = document.querySelector('input[name="userType"]:checked').value;
-            alert(`Intentando ingresar como: ${userType} - Cédula: ${cedula}`);
+            const tipo = document.querySelector('input[name="userType"]:checked').value;
+            const cedulaRIF = pretextCedula.textContent + inputCedula.value;
+            alert(`Intentando ingresar como: ${tipo} \nIdentificación: ${cedulaRIF}`);
             // Aquí conectarás con Supabase
         });
     </script>
