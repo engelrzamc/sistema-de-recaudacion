@@ -3,48 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Tributos - Alcaldía de Ayacucho</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sistema de Tributos - Alcaldía Ayacucho - Autenticación</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS GENERALES (Reset) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        a:hover { color: #0056b3; text-decoration: underline; }
+
+        /* --- 1. ENCABEZADO INSTITUCIONAL (Header) --- */
+        header { width: 100%; border-bottom: 1px solid #e0e0e0; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; height: 60px; }
+        
+        .logo-gobierno { height: 40px; }
+        .logo-ayacucho { height: 40px; } /* Tu logo institucional secundario */
+
+        .nav-inicio { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; color: #333; cursor: pointer; }
+        .icon-inicio { font-size: 18px; } /* Placeholder para un icono real */
+
+        .header-bar { width: 100%; height: 50px; background-color: #004b9c; display: flex; align-items: center; padding: 0 5%; color: white; }
+        .icon-menu { font-size: 20px; margin-right: 15px; cursor: pointer; }
+        .title-tributos { font-size: 18px; font-weight: 500; }
+
+        /* --- 2. CUERPO DE LA PÁGINA (Login Container) --- */
+        main { display: flex; flex: 1; position: relative; }
+
+        /* Sección Izquierda: Imagen Fachada (75%) */
+        .fachada-dinamica {
+            width: 75%;
+            height: calc(100vh - 110px); /* Restando header y footer aproximados */
+            /* PEGA AQUÍ TU URL PRINCIPAL DE CLOUDINARY PARA QUE NO SE VEA VACÍO */
+            background-image: url('https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia_ayacucho.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: background-image 0.8s ease-in-out; /* Suavizado para el cambio aleatorio */
+        }
+        
+        /* Overlay oscuro para legibilidad si hay texto */
+        .fachada-dinamica::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.15); /* Muy ligero para mantener la foto clara */
+        }
+
+        /* Sección Derecha: Formulario (25%) */
+        .form-tributos-container {
+            width: 25%;
+            min-width: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 340px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .h2-autenticacion { font-size: 16px; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 25px; }
+
+        /* Selectores de Tipo de Usuario (Radios replicando el estilo) */
+        .user-type-group { margin-bottom: 25px; }
+        
+        .radio-option { display: flex; align-items: center; margin-bottom: 15px; cursor: pointer; }
+        .radio-option input { margin-right: 12px; width: 18px; height: 18px; accent-color: #004b9c; cursor: pointer; }
+        .radio-label { font-size: 13px; color: #555; font-weight: 500; }
+
+        /* Campos de Entrada (Estilo SAIME con Iconos) */
+        .form-group-login { margin-bottom: 18px; position: relative; }
+        
+        .form-group-login label { display: block; font-size: 12px; font-weight: 500; color: #777; margin-bottom: 5px; }
+        
+        .input-with-icon {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            padding: 10px 10px 10px 45px;
+            font-size: 14px;
+            background-color: #fafafa;
+            transition: 0.3s;
+        }
+        
+        .input-with-icon:focus { border-color: #004b9c; background-color: #fff; outline: none; box-shadow: 0 0 5px rgba(0,75,156,0.2); }
+
+        .input-icon { position: absolute; left: 15px; top: 34px; color: #aaa; font-size: 18px; }
+
+        /* Links de "Olvidó" y "Registrar" */
+        .login-helper-links { display: flex; justify-content: space-between; font-size: 12px; color: #004b9c; margin-bottom: 30px; }
+
+        /* Botón de Acción Principal (Estilo SAIME) */
+        .btn-ingresar {
+            width: 100%;
+            height: 45px;
+            background-color: #004b9c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .btn-ingresar:hover { background-color: #003a7a; }
+
+        /* --- 3. PIE DE PÁGINA INSTITUCIONAL (Footer) --- */
+        footer {
+            width: 100%;
+            border-top: 1px solid #e0e0e0;
+            font-size: 11px;
+            color: #666;
+            background-color: #ffffff;
+        }
+
+        .footer-top-line { height: 10px; background: linear-gradient(to right, #003061 50%, #ffffff 50%); } /* Placeholder para el borde de la imagen */
+        
+        .footer-content { display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; gap: 20px; padding: 20px 5%; line-height: 1.5; text-align: left; }
+        
+        .footer-col-logos { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+        .footer-logo-institucional { height: 35px; }
+
+        /* --- 4. RESPONSIVIDAD --- */
+        @media (max-width: 1024px) {
+            .fachada-dinamica { display: none; }
+            .form-tributos-container { width: 100%; min-width: 100%; padding: 40px 0; }
+        }
+    </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-image" id="fachada-dinamica">
-            <div class="overlay">
-                <h1>Alcaldía del Municipio Ayacucho</h1>
-                <p>Gestión transparente y eficiente para nuestro pueblo.</p>
-            </div>
-        </div>
 
-        <div class="login-form-section">
-            <div class="form-box">
-                <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/escudo-ayacucho.png" alt="Escudo Ayacucho" class="logo">
-                <h2>Iniciar Sesión</h2>
-                <p>Ingrese sus credenciales para acceder al sistema de impuestos.</p>
+    <header>
+        <div class="header-top">
+            <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/logo-gobierno-venezuela.png" alt="Gobierno Venezuela" class="logo-gobierno">
+            <div class="nav-inicio">
+                <span class="icon-inicio">🏠</span> Inicio
+            </div>
+            <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/escudo-ayacucho.png" alt="Escudo Ayacucho" class="logo-ayacucho">
+        </div>
+        <div class="header-bar">
+            <span class="icon-menu">☰</span>
+            <span class="title-tributos">Gestión de Tributos Municipales</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="fachada-dinamica" id="bg-ayacucho"></div>
+
+        <div class="form-tributos-container">
+            <div class="login-box">
+                <h2 class="h2-autenticacion">Autenticación de Contribuyente</h2>
                 
                 <form id="loginForm">
-                    <div class="input-group">
-                        <label for="cedula">Cédula o RIF</label>
-                        <input type="text" id="cedula" placeholder="V-12345678" required>
+                    <div class="user-type-group">
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="cedula_v" checked>
+                            <span class="radio-label">Venezolano Cedulado (Persona Natural)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="userType" value="rif_j">
+                            <span class="radio-label">Persona Jurídica / RIF Comercial</span>
+                        </label>
                     </div>
-                    
-                    <div class="input-group">
+
+                    <div class="form-group-login">
+                        <label for="cedula">Cédula de Identidad o RIF</label>
+                        <span class="input-icon">👤</span> <input type="text" id="cedula" name="cedula" class="input-with-icon" placeholder="V-12345678" required>
+                    </div>
+
+                    <div class="form-group-login">
                         <label for="password">Contraseña</label>
-                        <input type="password" id="password" placeholder="••••••••" required>
+                        <span class="input-icon">🔑</span> <input type="password" id="password" name="password" class="input-with-icon" placeholder="••••••••" required>
                     </div>
-                    
-                    <button type="submit" class="btn-primary">Entrar al Sistema</button>
+
+                    <div class="login-helper-links">
+                        <a href="#">¿Olvidó su contraseña?</a>
+                        <a href="registro.html">Regístrate como Nuevo Contribuyente</a>
+                    </div>
+
+                    <button type="submit" class="btn-ingresar">Ingresar</button>
                 </form>
-                
-                <div class="form-footer">
-                    <a href="#">¿Olvidó su contraseña?</a>
-                    <span>|</span>
-                    <a href="registro.html">Registrarse como Contribuyente</a>
-                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <script src="script.js"></script>
+    <footer>
+        <div class="footer-top-line"></div>
+        <div class="footer-content">
+            <div>
+                <strong>Alcaldía del Municipio Ayacucho</strong><br>
+                San Juan de Colón, Estado Táchira.<br>
+                coordinaciondetributos.ayacucho@gmail.com
+            </div>
+            <div>
+                <strong>RIF de la Alcaldía</strong><br>
+                G-20000XXX-X
+            </div>
+            <div>
+                <strong>Atención Ciudadana</strong><br>
+                Lunes a Viernes<br>
+                08:00 AM - 04:00 PM
+            </div>
+            <div>
+                <strong>Avenida XXX, Edificio Sede.</strong><br>
+                Planta Baja. San Juan de Colón.
+            </div>
+            <div class="footer-col-logos">
+                <img src="https://res.cloudinary.com/tu-usuario/image/upload/v1/logos/logo-ayacucho.png" alt="Logo Alcaldía" class="footer-logo-institucional">
+                <strong>MUNICIPIO AYACUCHO</strong>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- SUSTITUYE ESTOS LINKS POR TUS URLs DE CLOUDINARY ---
+        const imagenesAyacucho = [
+            "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia1.jpg",
+            "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/fachada2.jpg",
+            "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/plaza_bolivar.jpg"
+        ];
+
+        function cambiarFondoAleatorio() {
+            const contenedorBg = document.getElementById('bg-ayacucho');
+            if (contenedorBg) {
+                // Elegir una imagen al azar de la lista
+                const fotoSeleccionada = imagenesAyacucho[Math.floor(Math.random() * imagenesAyacucho.length)];
+                contenedorBg.style.backgroundImage = `url('${fotoSeleccionada}')`;
+            }
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = cambiarFondoAleatorio;
+
+        // Manejar envío del formulario (Placeholder)
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const cedula = document.getElementById('cedula').value;
+            const userType = document.querySelector('input[name="userType"]:checked').value;
+            alert(`Intentando ingresar como: ${userType} - Cédula: ${cedula}`);
+            // Aquí conectarás con Supabase
+        });
+    </script>
+
 </body>
 </html>
