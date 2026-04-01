@@ -1,7 +1,7 @@
 const imagenesFachadas = [
-    "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia_frente.jpg",
-    "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/alcaldia_noche.jpg",
-    "https://res.cloudinary.com/tu-usuario/image/upload/v1/fachadas/plaza_bolivar.jpg"
+    "https://res.cloudinary.com/dtne63b6s/image/upload/v1775025846/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg",
+    "https://res.cloudinary.com/dtne63b6s/image/upload/v1775025846/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg",
+    "https://res.cloudinary.com/dtne63b6s/image/upload/v1775025846/Plaza_Bolivar___San_Juan_de_Col%C3%B3n_hihby6.jpg"
 ];
 
 // Cambiar la imagen de fondo aleatoriamente al cargar
